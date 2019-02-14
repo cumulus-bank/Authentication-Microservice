@@ -1,0 +1,111 @@
+replicaCount: 2
+
+metadata:
+ name: authsvc 
+ label: authsvc
+readinessProbe:
+  path: /healthz
+  port: 3003
+  initialDelaySeconds: 10
+  timeoutSeconds: 2
+  periodSeconds: 10
+
+livenessProbe:
+  path: /healthz
+  port: 3003
+  initialDelaySeconds: 10
+  timeoutSeconds: 2
+  periodSeconds: 10
+image:
+  name: authsvc
+  imageName: "mycluster.icp:8500/default/auth-microservice:0.0.1" 
+  imagePullPolicy: Always
+  ports:
+    containerPort: 3003
+  requests:
+    cpu: "50m"
+    memory: "15Mi"
+  limits:
+    cpu: "80m"
+    memory: "200Mi"
+  maxSurge: 1
+  maxUnavailable: 0
+  lifecycle:
+    preStop:
+      command: ["/bin/bash", "-c", "sleep 20"]
+  
+hpa:
+  metadata:
+    name: authsvcmicroservicehpa
+  spec:
+    maxReplicas: 10
+    minReplicas: 2
+  metrics:
+    pods:
+      targetAverageValue: 30
+    resource:
+      name: cpu
+      targetAverageUtilization: 50
+    memory:
+      targetAverageUtilization: 50
+  scaleTargetRef:  
+    name: authsvc
+
+envOfSecrets:
+  envUID:
+    name: UID
+    secretKeyRef:
+      name: cumulusbankauth
+      key: UID
+  envPASSWORD:
+    name: PASSWORD
+    secretKeyRef:
+      name: cumulusbankauth
+      key: PASSWORD
+  envSECRET:
+    name: SECRET
+    secretKeyRef:
+      name: cumulusbankauth
+      key: SECRET
+
+envOfConfigmaps:
+  envNODE_ENV:
+    name: NODE_ENV
+    configMapKeyRef:
+      name: cumulusbankauth
+      key: NODE_ENV
+  envDATABASE:
+    name: DATABASE
+    configMapKeyRef:
+      name: cumulusbankauth
+      key: DATABASE
+  envPORT:
+    name: PORT
+    configMapKeyRef:
+      name: cumulusbankauth
+      key: PORT
+  envHOSTNAME:
+    name: HOSTNAME
+    configMapKeyRef:
+      name: cumulusbankauth
+      key: HOSTNAME
+  envPROTOCOL:
+    name: PROTOCOL
+    configMapKeyRef:
+      name: cumulusbankauth
+      key: PROTOCOL
+
+
+service:
+  serviceMetadata:
+    name: authsvc
+    labels:
+      app: authsvc
+  selector:
+    selectorName: authsvc
+  servicePortConfiguration:
+    protocol: TCP
+    name: authsvc
+    type: ClusterIP
+    port: 3003
+    targetPort: 3003
