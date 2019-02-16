@@ -24,7 +24,7 @@ image:
     containerPort: 3003
   requests:
     cpu: "50m"
-    memory: "15Mi"
+    memory: "150Mi"
   limits:
     cpu: "80m"
     memory: "200Mi"

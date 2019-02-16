@@ -104,7 +104,7 @@ class App {
     router.post("/createUser", (req, res, next) => {
       ibmdb.open(this.connectionString, function(err, conn) {
         conn.prepare(
-          "insert into SAMPLE.UserData (LastName, FirstName, Email, Password, Dob, Mobile) VALUES (?, ?, ?, ?, ?, ?, ?)",
+          "insert into SAMPLE.UserData (LastName, FirstName, Email, Password, Age, Mobile) VALUES (?, ?, ?, ?, ?, ?, ?)",
           function(err, stmt) {
             if (err) {
               console.log(err);
@@ -114,11 +114,10 @@ class App {
               [
                 req.body.lastName,
                 req.body.firstName,
-                req.body.location,
                 req.body.email,
                 passwordhash.generate(req.body.password),
                 req.body.age,
-                req.body.tier
+                req.body.mobile
               ],
               function(err, result) {
                 if (err) {
