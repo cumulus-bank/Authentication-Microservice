@@ -7,5 +7,5 @@ data:
   NODE_ENV: development
   DATABASE: SAMPLE
   PORT: '50000'
-  HOSTNAME: 'cumulusbankauth-ibm-db2oltp-dev-db2.default'
+  HOSTNAME: 'cumulusdb2-ibm-db2oltp-dev-db2.default'
   PROTOCOL: TCPIP
