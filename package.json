@@ -1,5 +1,5 @@
 {
-  "name": "authentication microservice",
+  "name": "icp-backend",
   "version": "1.0.0",
   "description": "",
   "main": "./dist/index.js",
@@ -19,6 +19,7 @@
     "@types/express": "^4.11.1",
     "@types/express-serve-static-core": "4.0.49",
     "@types/morgan": "^1.7.32",
+    "@types/node": "^6.0.111",
     "babel-loader": "^8.0.4",
     "babel-polyfill": "^6.26.0",
     "gulp": "^4.0.0",
@@ -30,7 +31,7 @@
     "@babel/polyfill": "^7.0.0",
     "@types/base-64": "^0.1.2",
     "@types/http-server": "^0.10.0",
-    "@types/node": "^11.9.4",
+    "@types/node": "^6.0.112",
     "@types/utf8": "^2.1.6",
     "body-parser": "^1.18.3",
     "clean-webpack-plugin": "^0.1.19",
