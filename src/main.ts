@@ -1,9 +1,7 @@
-import * as http from 'http';
-import * as debug from 'debug';
+import http = require('http');
+const debug = require('debug')('ts-express:server');
 
 import App from './App';
-
-debug('ts-express:server');
 
 const port = normalizePort(3003);
 App.set('port', port);

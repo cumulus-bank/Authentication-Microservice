@@ -1,10 +1,10 @@
-import * as express from "express";
-import * as logger from "morgan";
-import * as bodyParser from "body-parser";
-import * as passwordhash from "password-hash";
-import * as jwt from "jsonwebtoken";
-import * as passportJWT from "passport-jwt";
-import * as passport from "passport";
+import express = require("express");
+import logger = require("morgan");
+import bodyParser = require("body-parser");
+const passwordhash = require("password-hash");
+const jwt = require("jsonwebtoken");
+const passportJWT = require("passport-jwt");
+import passport = require("passport");
 
 const mysql = require("mysql2/promise");
 

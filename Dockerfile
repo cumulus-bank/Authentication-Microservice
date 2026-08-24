@@ -3,8 +3,7 @@ WORKDIR /usr/src/app
 COPY package*.json ./
 RUN npm install
 COPY . .
-RUN npm install -g webpack-cli
-RUN webpack-cli
+RUN npx tsc
 EXPOSE 3003
 USER node
-CMD [ "npm", "start" ]
+CMD [ "node", "dist/main.js" ]
