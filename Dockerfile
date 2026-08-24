@@ -1,12 +1,10 @@
-FROM node:9.8.0
+FROM node:18-alpine
 WORKDIR /usr/src/app
-COPY . .
+COPY package*.json ./
 RUN npm install
-EXPOSE 3003
-RUN npm i -g webpack webpack-cli
-RUN npm link webpack
+COPY . .
+RUN npm install -g webpack-cli
 RUN webpack-cli
-RUN groupadd -g 999 appuser && \
-    useradd -r -u 999 -g appuser appuser
-USER appuser
+EXPOSE 3003
+USER node
 CMD [ "npm", "start" ]
